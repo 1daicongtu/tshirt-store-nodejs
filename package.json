@@ -1,0 +1,25 @@
+{
+  "name": "backend-nodejs-tshirtstore",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --inspect index.js"
+  },
+  "keywords": [
+    "tshirt",
+    "store",
+    "web",
+    "tshirt"
+  ],
+  "author": "Nguyen Van Hieu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.22"
+  }
+}
