@@ -36,5 +36,7 @@ const Product = new Schema({
 
     ]
 })
+Product.index({productID: 1}, {unique: true})
+Product.index({productName: "text", SKU: "text", tag: "text", category: "text"})
 
 module.exports = mongoose.model("Product", Product)
