@@ -5,9 +5,10 @@ const authRouter= require("./auth")
 const commentRouter = require("./comment")
 const cartRouter = require("./cart")
 const wishlistRouter = require("./wishlist")
+const compareRouter = require("./compare")
 
 function routes(app){
-    // config cors
+    
     app.use("/products", productRouter)
     app.use("/stores", storeRouter)
     app.use("/users", userRouter)
@@ -15,6 +16,7 @@ function routes(app){
     app.use("/comments", commentRouter)
     app.use("/cart", cartRouter)
     app.use("/wishlist", wishlistRouter)
+    app.use("/compare", compareRouter)
 }
 
 module.exports = routes

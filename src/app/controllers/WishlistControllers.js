@@ -68,7 +68,7 @@ class WishlistControllers {
                
                 if (!wishListStringId.includes(productObjectId)){
                     const result = await Wishlist.updateOne({userID: userID}, {$push: {wishlists: productObjectId}})
-                    console.log(result)
+                   
                     return res.status(200).json({
                         success: true,
                         message: "Add wishlist successfully"
