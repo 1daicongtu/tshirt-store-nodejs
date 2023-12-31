@@ -6,6 +6,7 @@ const commentRouter = require("./comment")
 const cartRouter = require("./cart")
 const wishlistRouter = require("./wishlist")
 const compareRouter = require("./compare")
+const contactRouter = require("./contact")
 
 function routes(app){
     
@@ -17,6 +18,7 @@ function routes(app){
     app.use("/cart", cartRouter)
     app.use("/wishlist", wishlistRouter)
     app.use("/compare", compareRouter)
+    app.use("/contact", contactRouter)
 }
 
 module.exports = routes
