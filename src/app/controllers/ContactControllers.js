@@ -1,6 +1,6 @@
 const Contact = require("../models/contact")
 
-const ContactController = {
+class ContactController{
     async addContact(req, res, next){
         const {username, email, massage} = req.body
         if (!username || !email){
@@ -16,4 +16,4 @@ const ContactController = {
     }
 }
 
-module.exports = ContactController;
+module.exports = new ContactController()

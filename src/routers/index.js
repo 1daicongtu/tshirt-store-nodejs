@@ -7,6 +7,7 @@ const cartRouter = require("./cart")
 const wishlistRouter = require("./wishlist")
 const compareRouter = require("./compare")
 const contactRouter = require("./contact")
+const coupon = require("./coupon")
 
 function routes(app){
     
@@ -19,6 +20,7 @@ function routes(app){
     app.use("/wishlist", wishlistRouter)
     app.use("/compare", compareRouter)
     app.use("/contact", contactRouter)
+    app.use("/coupons", coupon)
 }
 
 module.exports = routes
