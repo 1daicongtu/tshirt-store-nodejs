@@ -4,9 +4,6 @@ const jwt = require("jsonwebtoken")
 const { get } = require("mongoose")
 require('dotenv').config()
 
-const SECRETKEY_ACCESSTOKEN="123123"
-const SECRETKEY_REFRESHTOKEN="123123"
-
 const getAccestoken = (username, email) => {
 
     const secretKeyAccessToken = process.env.SECRETKEY_ACCESSTOKEN
