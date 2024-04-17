@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const CouponController = require("../app/controllers/CouponController.js")
+const {
+    getAllCouponNotExpired
+} = require("../app/controllers/CouponController.js")
 
-router.get("/", CouponController.getAllCouponNotExpired);
+router.get("/", getAllCouponNotExpired);
 
 module.exports = router;
 

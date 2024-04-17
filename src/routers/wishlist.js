@@ -1,11 +1,16 @@
 const express = require("express")
 const router = express.Router()
 
-const WishlistControllers = require("../app/controllers/WishlistControllers.js")
+const {
+    addMany,
+    addOne,
+    deleteOne,
+    getAll
+} = require("../app/controllers/WishlistControllers.js")
 
-router.post("/add-many", WishlistControllers.addMany)
-router.post("/add-one", WishlistControllers.addOne)
-router.delete("/", WishlistControllers.deleteOne)
-router.get("/get-all-by-userID", WishlistControllers.getAll)
+router.post("/add-many", addMany)
+router.post("/add-one", addOne)
+router.delete("/", deleteOne)
+router.get("/get-all-by-userID", getAll)
 
 module.exports = router;

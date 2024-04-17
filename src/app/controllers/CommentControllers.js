@@ -21,88 +21,89 @@ const cloudinaryUploadOneImage = async (images) => {
 }
 
 
-class CommentController{
-    async postComment(req, res, next){
+async function postComment(req, res, next){
         
-        try {
-            let otherData = null;
-            let imagesData = [];
-            let form = new formidable.IncomingForm(); 
-            form.parse(req, async(err, fields, files) => {
-                if (err) return res.status(401).json({message: "upload image failed"})
-               
-                if (files?.images) {
-                    for (const file of files.images){
-                        imagesData.push(await cloudinaryUploadOneImage(file.filepath))
-                    }
+    try {
+        let otherData = null;
+        let imagesData = [];
+        let form = new formidable.IncomingForm(); 
+        form.parse(req, async(err, fields, files) => {
+            if (err) return res.status(401).json({message: "upload image failed"})
+           
+            if (files?.images) {
+                for (const file of files.images){
+                    imagesData.push(await cloudinaryUploadOneImage(file.filepath))
                 }
+            }
 
-                otherData = JSON.parse(fields?.data[0])
-                
-                await Comment.create({
-                    ...otherData,
-                    images: imagesData.length > 0 ? imagesData : null
-                })
-                return res.status(200).json({message: "Create comment successfully"});
+            otherData = JSON.parse(fields?.data[0])
+            
+            await Comment.create({
+                ...otherData,
+                images: imagesData.length > 0 ? imagesData : null
             })
+            return res.status(200).json({message: "Create comment successfully"});
+        })
 
-        } catch (error) {
-            return res.status(500).json({message: "Error when create comment"})
-        }
-       
+    } catch (error) {
+        return res.status(500).json({message: "Error when create comment"})
     }
-    async getRateCommentByProductID(req, res, next){
-        let proID = req.query.productID;
+   
+}
+async function getRateCommentByProductID(req, res, next){
+    let proID = req.query.productID;
 
-        proID = proID - 0;
+    proID = proID - 0;
 
-        
-        try {
-        
-            const result = await Comment.aggregate(
-                [
-                {
-                    $match: {
-                        productID: proID
-                    }
-                },
-                {
-                    $group: {
-                        _id: "$rating",
-                        count: { $sum: 1 }
-                    }
-                },
-                {
-                    $project: {
-                        _id: 0,
-                        star: "$_id",
-                        count: 1
-                    }
+    
+    try {
+    
+        const result = await Comment.aggregate(
+            [
+            {
+                $match: {
+                    productID: proID
                 }
-                ]
-            )
-          
-            return res.status(200).json({result})
-       } catch (error) {
-            return res.status(500).json({message: "Error when get comment"})
-       }
+            },
+            {
+                $group: {
+                    _id: "$rating",
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    star: "$_id",
+                    count: 1
+                }
+            }
+            ]
+        )
+      
+        return res.status(200).json({result})
+   } catch (error) {
+        return res.status(500).json({message: "Error when get comment"})
+   }
 
+}
+async function getCommentByProductID(req, res, next){
+    let limit = req.query.limit - 0;
+    let page = req.query.page - 0;
+    let proID = req.query.productID - 0;
+    try {
+        const result = await Comment.find({productID: proID}).skip((page - 1) * limit).limit(limit).lean();
+
+        return res.status(200).json({isMax: result.length != limit , result})
+
+    } catch (error) {
+        return res.status(500).json({message: "Error when get comment"})
     }
-    async getCommentByProductID(req, res, next){
-        let limit = req.query.limit - 0;
-        let page = req.query.page - 0;
-        let proID = req.query.productID - 0;
-        try {
-            const result = await Comment.find({productID: proID}).skip((page - 1) * limit).limit(limit).lean();
-
-            return res.status(200).json({isMax: result.length != limit , result})
-
-        } catch (error) {
-            return res.status(500).json({message: "Error when get comment"})
-        }
-        
-    }
+    
 }
 
-module.exports = new CommentController()
-
+module.exports = {
+    postComment,
+    getRateCommentByProductID,
+    getCommentByProductID
+}

@@ -1,10 +1,14 @@
 const express = require("express")
 const router = express.Router()
 
-const commentController = require("../app/controllers/CommentControllers.js")
+const {
+    getCommentByProductID,
+    getRateCommentByProductID, 
+    postComment
+} = require("../app/controllers/CommentControllers.js")
 
-router.post("/post-comment", commentController.postComment)
-router.get("/get-rate-comment", commentController.getRateCommentByProductID)
-router.get("/get-comment", commentController.getCommentByProductID)
+router.post("/post-comment", postComment)
+router.get("/get-rate-comment", getRateCommentByProductID)
+router.get("/get-comment", getCommentByProductID)
 
 module.exports = router;
