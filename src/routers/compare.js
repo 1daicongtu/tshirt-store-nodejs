@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const CompareControllers = require("../app/controllers/CompareControllers")
+const CompareControllers = require("../app/controllers/CompareControllers.js")
 
 router.post("/add-one", CompareControllers.addOne)
 router.post("/add-many", CompareControllers.addMany)

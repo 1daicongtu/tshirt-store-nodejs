@@ -1,13 +1,13 @@
-const productRouter = require("./product")
-const storeRouter = require("./store")
-const userRouter = require("./user")
-const authRouter= require("./auth")
-const commentRouter = require("./comment")
-const cartRouter = require("./cart")
-const wishlistRouter = require("./wishlist")
-const compareRouter = require("./compare")
-const contactRouter = require("./contact")
-const coupon = require("./coupon")
+const productRouter = require("./product.js")
+const storeRouter = require("./store.js")
+const userRouter = require("./user.js")
+const authRouter= require("./auth.js")
+const commentRouter = require("./comment.js")
+const cartRouter = require("./cart.js")
+const wishlistRouter = require("./wishlist.js")
+const compareRouter = require("./compare.js")
+const contactRouter = require("./contact.js")
+const coupon = require("./coupon.js")
 
 function routes(app){
     

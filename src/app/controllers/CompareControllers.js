@@ -1,4 +1,4 @@
-const Compare = require("../models/compare")
+const Compare = require("../models/compare.js")
 
 const checkIsContain = (productID, listCompare) => {
     const index = listCompare.findIndex(item => item.toString() === productID);

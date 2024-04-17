@@ -1,5 +1,5 @@
-const Wishlist = require("../models/wishlist")
-const Product = require("../models/product")
+const Wishlist = require("../models/wishlist.js")
+const Product = require("../models/product.js")
 
 
 var ObjectId = require('mongoose').Types.ObjectId; 

@@ -1,5 +1,5 @@
-const Comment = require("../models/comment")
-const cloudinary = require("../../utils/cloudinary")
+const Comment = require("../models/comment.js")
+const cloudinary = require("../../utils/cloudinary.js")
 var formidable = require("formidable")
 
 const cloudinaryUploadOneImage = async (images) => {
