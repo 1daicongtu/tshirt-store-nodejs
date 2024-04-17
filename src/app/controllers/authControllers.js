@@ -2,18 +2,20 @@ const User = require("../models/user")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const { get } = require("mongoose")
-const SECRETKEY_ACCESSTOKEN="hieunguyen"
-const SECRETKEY_REFRESHTOKEN="nguyenhieu"
+require('dotenv').config()
+
+const SECRETKEY_ACCESSTOKEN="123123"
+const SECRETKEY_REFRESHTOKEN="123123"
 
 const getAccestoken = (username, email) => {
 
-    const secretKeyAccessToken = SECRETKEY_ACCESSTOKEN
+    const secretKeyAccessToken = process.env.SECRETKEY_ACCESSTOKEN
     const accessToken = jwt.sign({username, email}, secretKeyAccessToken, {expiresIn: "1d"})
     return accessToken;
 }
 
 const getRefreshToken = (username, email) => {
-    const secretKeyRefreshToken = SECRETKEY_REFRESHTOKEN
+    const secretKeyRefreshToken = process.env.SECRETKEY_REFRESHTOKEN
     const refreshToken = jwt.sign({username, email}, secretKeyRefreshToken, {expiresIn: "7d"})
     return refreshToken
 }
@@ -45,7 +47,7 @@ class Authentication{
         let refreshToken = req.body?.refreshToken
         if (!refreshToken) return res.status(401).json({message: "Refresh token is required"});
 
-        jwt.verify(refreshToken, SECRETKEY_REFRESHTOKEN, (err, decoded)=>{
+        jwt.verify(refreshToken, process.env.SECRETKEY_REFRESHTOKEN, (err, decoded)=>{
             if (err) return res.status(401).json({message: "Refresh token is invalid"})
 
             const username = decoded.username
